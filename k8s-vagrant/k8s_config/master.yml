@@ -3,7 +3,8 @@
   become: true
   tasks:
     - name: Initialize the Kubernetes cluster using kubeadm
-      command: kubeadm init --apiserver-advertise-address="192.168.50.10" --apiserver-cert-extra-sans="192.168.50.10"  --node-name k8s-master --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=all
+      command: kubeadm init --apiserver-advertise-address="{{node_ip}}" --apiserver-cert-extra-sans="{{node_ip}}"  --node-name k8s-master --pod-network-cidr=192.168.0.0/16
+      # command: kubeadm init --node-name k8s-master --pod-network-cidr=192.168.0.0/16
 
     - name: Setup kubeconfig for vagrant user
       command: "{{ item }}"
@@ -22,4 +23,4 @@
 
     - name: Copy join command to local file
       become: no
-      local_action: copy content="sudo {{ join_command.stdout_lines[0] }} --ignore-preflight-errors=all" dest="./join-command"
+      local_action: copy content="sudo {{ join_command.stdout_lines[0] }}" dest="./join-command"

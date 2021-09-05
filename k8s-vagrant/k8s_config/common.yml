@@ -22,7 +22,7 @@
 
     - name: Add apt repository for stable version
       apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
         state: present
 
     - name: Install docker and its dependecies
@@ -80,14 +80,14 @@
         update_cache: yes
       vars:
         packages:
-          - kubelet
-          - kubeadm
-          - kubectl
+          - kubelet=1.20.5-00
+          - kubeadm=1.20.5-00
+          - kubectl=1.20.5-00
 
     - name: Configure node ip
       lineinfile:
         path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
-        line: KUBELET_EXTRA_ARGS=--node-ip={{ node_ip }}
+        line: KUBELET_EXTRA_ARGS="--node-ip={{ node_ip }}"
 
   handlers:
     - name: docker status
