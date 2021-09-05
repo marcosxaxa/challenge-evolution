@@ -16,5 +16,5 @@
 
     - name: Remove join command
       file:
-        path: ./join-command
+        path: join-command
         state: absent
