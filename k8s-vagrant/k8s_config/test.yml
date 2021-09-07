@@ -2,20 +2,9 @@
 - hosts: all
   become: true
   tasks:
-    - name: Create kafka namespace
-      command: kubectl create ns kafka
-    # - name: Create kafka namespace
-    #   k8s:
-    #     name: kafka
-    #     api_version: v1
-    #     kind: Namespace
-    #     state: present
-
-    # - name: Create cluste operator
-    #   k8s:
-    #     state: present
-    #     src: ../kubernetes-files/strimzi-operator.yaml
-    #     namespace: kafka
-
-    # - name: Teste task
-    #   command: touch /tmp/itWorks
+    - name: Wait for kubernetes starts
+      wait_for:
+        port: 8080
+        delay: 10
+    - name: Run script to deploy everything
+      script:
