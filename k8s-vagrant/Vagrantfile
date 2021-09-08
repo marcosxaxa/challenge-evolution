@@ -53,10 +53,13 @@ Vagrant.configure("2") do |config|
                         node_ip: "10.0.0.#{i + 10}",
                     }
                 end
-                # node.vm.provision "ansible" do |ansible|
-                #     ansible.limit = "k8s-master"
-                #     ansible.playbook = "k8s_config/test.yml"
-                # end
+                node.vm.provision "ansible" do |ansible|
+                    ansible.limit = "k8s-master"
+                    ansible.playbook = "k8s_config/app_deploy.yml"
+                    ansible.extra_vars = {
+                        node_ip: "10.0.0.10",
+                    }
+                end
             end
         end
     else
@@ -71,6 +74,13 @@ Vagrant.configure("2") do |config|
             master.vm.provision "ansible" do |ansible|
                 ansible.limit = "k8s-master"
                 ansible.playbook = "k8s_config/master.yml"
+                ansible.extra_vars = {
+                    node_ip: "10.0.0.10",
+                }
+            end
+            master.vm.provision "ansible" do |ansible|
+                ansible.limit = "k8s-master"
+                ansible.playbook = "k8s_config/app_deploy.yml"
                 ansible.extra_vars = {
                     node_ip: "10.0.0.10",
                 }

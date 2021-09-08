@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    # - name: Wait for kubernetes to start
+    #   wait_for:
+    #     port: 6443
+    #     delay: 120
+
+    - name: copy config files to target
+      copy:
+        src: k8s-app-deploy
+        dest: /home/vagrant/
+        mode: 0644
+
+    - name: Run script to deploy everything
+      shell: cd /home/vagrant/k8s-app-deploy/ ; bash deploy-script.sh

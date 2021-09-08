@@ -1,9 +1,11 @@
 #!/bin/bash
 
-git clone git@github.com:marcosxaxa/challenge.git ~/config
-cd config/kubernetes-files/
+# git clone git@github.com:marcosxaxa/challenge.git ~/config
+# cd /home/vagrant/k8s-app-deploy
+# echo "Entering folder"
+# pwd
 
-kubectl wait node/k8s-master --for=condition=Ready --timeout=300s
+kubectl wait node/k8s-master --for=condition=Ready --timeout=300s >> /tmp/deploy.log
 
 kubectl taint node k8s-master node-role.kubernetes.io/master:NoSchedule-
 
@@ -11,7 +13,7 @@ kubectl apply -f kafka/kafka-operator.yaml -n kafka
 
 podname=$(kubectl get pods -n kafka |awk -F ' ' '{print $1}' |sed -n 2p)
 
-kubectl wait pod/$podname --for=condition=Ready --timeout=60s -n kafka
+kubectl wait pod/$podname --for=condition=Ready --timeout=300s -n kafka
 
 kubectl apply -f kafka/kafka-ephemeral-single.yaml -n kafka
 
@@ -23,16 +25,21 @@ kubectl apply -f prometheus/prometheus-operator.yaml -n monitoring
 
 promname=$(kubectl get pods -n monitoring |awk -F ' ' '{print $1}' |sed -n 2p)
 
-kubectl wait pod/$promname --for=condition=Ready --timeout=60s -n monitoring
+kubectl wait pod/$promname --for=condition=Ready --timeout=300s -n monitoring
 
 kubectl apply -f prometheus/ -n monitoring #### The strimzi pod monitor is to be deployed in the kafka ns
-kubectl apply -f kafka/strimzi-pod-monitor.yaml -n kafka
+# kubectl apply -f kafka/strimzi-pod-monitor.yaml -n kafka
 
 kubectl apply -f grafana/grafana.yaml -n monitoring
 
-grafanaName=$(kubectl get pods -n monitoring  |grep grafana | awk  '{print $1}')
+#kubectl get pods -n monitoring  |grep grafana | awk  '{print $1}'
 
-kubectl port-forward $grafanaName 3000 -n monitoring &
+export grafanaName=$(kubectl get pods -n monitoring  |grep grafana | awk  '{print $1}')
+echo $grafanaName
+kubectl wait pod/$grafanaName --for=condition=Ready --timeout=300s -n monitoring
+
+#sleep 10
+kubectl port-forward --address 0.0.0.0 $grafanaName 3000 -n monitoring &
 
 sleep 5
 
