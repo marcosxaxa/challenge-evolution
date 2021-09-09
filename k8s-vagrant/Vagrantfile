@@ -1,11 +1,11 @@
 IMAGE_NAME = "ubuntu/bionic64"
-N = 0
+N = 2
 
 Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
 
     config.vm.provider "virtualbox" do |v|
-        v.memory = 4096
+        v.memory = 1900
         v.cpus = 2
     end
       
@@ -39,7 +39,15 @@ Vagrant.configure("2") do |config|
                     #     node_ip: "10.0.0.#{i + 10}",
                     # }
                 end
+                # node.vm.provision "ansible", type: :ansible_local do |ansible|
+                #     ansible.galaxy_role_file = 'k8s_config/requirements.yml'
+                #     # ansible.playbook = "k8s_config/master.yml"
+                #     # ansible.extra_vars = {
+                #     #     node_ip: "10.0.0.10",
+                #     # }
+                # end
                 node.vm.provision "ansible" do |ansible|
+                    # ansible.galaxy_role_file = 'k8s_config/requirements.yml'
                     ansible.limit = "k8s-master"
                     ansible.playbook = "k8s_config/master.yml"
                     ansible.extra_vars = {
@@ -58,12 +66,20 @@ Vagrant.configure("2") do |config|
                     ansible.playbook = "k8s_config/app_deploy.yml"
                     ansible.extra_vars = {
                         node_ip: "10.0.0.10",
+                        node_port: "31000",
                     }
                 end
             end
         end
     else
         config.vm.define "k8s-master" do |master|
+            # master.vm.provision "ansible", type: :ansible_local do |ansible|
+            #     ansible.galaxy_role_file = 'k8s_config/requirements.yml'
+            #     # ansible.playbook = "k8s_config/master.yml"
+            #     # ansible.extra_vars = {
+            #     #     node_ip: "10.0.0.10",
+            #     # }
+            # end
             master.vm.provision "ansible" do |ansible|
                 ansible.limit = "all"
                 ansible.playbook = "k8s_config/common.yml"
@@ -83,6 +99,7 @@ Vagrant.configure("2") do |config|
                 ansible.playbook = "k8s_config/app_deploy.yml"
                 ansible.extra_vars = {
                     node_ip: "10.0.0.10",
+                    node_port: "31000",
                 }
             end
         end
