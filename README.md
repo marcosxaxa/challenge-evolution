@@ -1,31 +1,48 @@
 # Welcome!
 
-This tutorial will instruct you on how to deploy a Kubernetes cluster using **VirtualBox** and **Vagrant**.
-You need the following installed on your machine in order to start:
+This tutorial will instruct you to deploy a Kubernetes cluster using **VirtualBox** and **Vagrant**.
+You need the following installed on your machine to start:
 
 1.  VirtualBox - [Installation docs](https://www.virtualbox.org/wiki/Downloads)
 2.  Vagrant - [Installation docs](https://www.vagrantup.com/downloads)
 
 ## Download project code:
 
-To download the code of this project you need to clone the git repository to your machine some how, either **http download** or through **git clone**
+To get the code of this project, you need to **git clone** the repository to your machine or to download a **zip** file
 
-PUT GIT REPOSITORY HERE
+```
+git clone https://github.com/marcosxaxa/challenge.git
+```
 
 ## Starting the Cluster
 
-After download the code described on the last step **cd** into the folder (vagrant folder)
+After download, the code described on last step **cd** into the folder (vagrant folder)
 
-To start the kubernetes cluster using vagrant and virtualbox enter the following command inside the vagrant folder:
+To start the Kubernetes cluster using Vagrant and VirtualBox, on the vagrant folder _(which have a Vagrantfile in it)_ :
 
-> vagrant up
+```
+cd challenge/k8s-vagrant
+vagrant up
+```
 
-Depending on the host resources this step may take a while. After the playbook finishes the **kubernetes** cluster along with kafka is provisioned and configured
+`Depending on the host resources, internet connection speed, etc, this step may take a while. After the playbook finishes, the **Kubernetes** cluster and Kafka are provisioned and configured.`
 
 ## Accessing cluster CLI
 
-First you need to ssh into the kubernetes master server:
+First, you need to _ssh_ into the Kubernetes master server _(same path from the previous step - **cd challenge/k8s-vagrant**)_ and give the command:
 
-> vagrant ssh k8s-master
+```
+vagrant ssh k8s-master
+```
 
-**_ Obs: You need to be inside the vagrant folder in order to performe this step_**
+From here, you can perform any call against the **Kubernetes API** with the **kubectl** command.
+
+**Obs: You need to be inside the vagrant folder to perform this step**
+
+## Accessing cluster/app metrics in Grafana
+
+The Grafana service is exposed in the node/nodes on the port **31000**. To access it, open your browser and type:
+
+> http://10.0.0.10:31000
+
+**\*User and password are **admin**\***

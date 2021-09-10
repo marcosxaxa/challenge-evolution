@@ -58,6 +58,9 @@ data:
     lowercaseOutputName: true
     rules:
     # Special cases and very specific rules
+    - pattern: kafka.producer<type=(.+), name=(.+), clientId=(.+), topic=(.+), partition=(.*)><>Value
+      name: kafka_producer_$1_$2
+      type: GAUGE
     - pattern: kafka.server<type=(.+), name=(.+), clientId=(.+), topic=(.+), partition=(.*)><>Value
       name: kafka_server_$1_$2
       type: GAUGE

@@ -1,1 +1,1 @@
-sudo kubeadm join 10.0.0.10:6443 --token qxcw73.k3wk16jsru4pemvv     --discovery-token-ca-cert-hash sha256:2bbc3a77dbd648748aee761986d58579a4a2530dfbeb870b95bbe8918a84f48c 
+sudo kubeadm join 10.0.0.10:6443 --token 2gnnpc.26sq5ttfi9sou6k2 --discovery-token-ca-cert-hash sha256:b1b9517cfb6d58220402e3cf43fd990b99b647805bb3733a2f50516ec17761f6 

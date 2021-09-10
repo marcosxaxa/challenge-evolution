@@ -86,10 +86,12 @@
         update_cache: yes
       vars:
         packages:
-          - kubelet=1.20.5-00
-          - kubeadm=1.20.5-00
-          - kubectl=1.20.5-00
+          - kubelet
+          - kubeadm
+          - kubectl
 
+    # - name: Pull kubeadm images
+    #   command: kubeadm config images pull &
     # - name: Configure node ip
     #   lineinfile:
     #     path: /etc/systemd/system/kubelet.service.d/10-kubeadm.conf

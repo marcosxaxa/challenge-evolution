@@ -19,6 +19,6 @@
     #     mode: 0655
 
     - name: Run script to deploy everything
-      script: "scripts/deploy-script.sh {{ node_ip }} {{ node_port }}"
+      shell: bash /home/vagrant/k8s-app-deploy/deploy-script.sh "{{ node_ip }}" "{{ node_port }}"
 
     #--kubeconfig=/home/dialog/.kube/config

@@ -1,14 +1,16 @@
 #!/bin/bash
 
-masterNode=$1
-masterNodePort=$2
+export masterNode=$1
+echo $masterNode
+export masterNodePort=$2
+echo $masterNodePort
 
 KubeConf=--kubeconfig=/home/vagrant/.kube/config
-BasePath=/home/vagrant/k8s-app-deploy
+export BasePath=/home/vagrant/k8s-app-deploy
 
 kubectl $KubeConf wait node/k8s-master --for=condition=Ready --timeout=300s
 
-kubectl $KubeConf taint node k8s-master node-role.kubernetes.io/master:NoSchedule-
+# kubectl $KubeConf taint node k8s-master node-role.kubernetes.io/master:NoSchedule-
 
 kubectl $KubeConf apply -f $BasePath/kafka/kafka-operator.yaml -n kafka
 
@@ -37,9 +39,8 @@ export grafanaName=$(kubectl $KubeConf get pods -n monitoring  |grep grafana | a
 
 kubectl $KubeConf wait pod/$grafanaName --for=condition=Ready --timeout=300s -n monitoring
 
-# kubectl $KubeConf port-forward --address 0.0.0.0 $grafanaName 3000 -n monitoring &
+kubectl $KubeConf apply -f $BasePath/producer-consumer.yaml -n kafka
 
-sleep 5
 
 APIKEY=$(curl -X POST -H "Content-Type: application/json" -d '{"name":"apikey", "role": "Admin"}' http://admin:admin@$masterNode:$masterNodePort/api/auth/keys |awk -F '"key":' '{print $2}' | awk -F '"' '{print $2}')
 

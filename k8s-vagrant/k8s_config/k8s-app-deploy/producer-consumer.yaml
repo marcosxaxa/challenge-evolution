@@ -1,40 +1,89 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: consumer
+  labels:
+    app: challenge
+    tier: consumer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: consumer
+  template:
+    metadata:
+      labels:
+        tier: consumer
+    spec:
+      containers:
+        - name: challenge-consumer
+          image: marcosxaxa/kafka-consumer:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "256m"
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
-  name: kafka-producer
+  name: producer
   labels:
-    app: producer
+    app: challenge
+    tier: producer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: producer
+      tier: producer
   template:
     metadata:
       labels:
-        app: producer
+        tier: producer
     spec:
       containers:
-        - name: producer
-          image: marcosxaxa/kafka-producer:0.0.1
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: kafka-consumer
-  labels:
-    app: consumer
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: consumer
-  template:
-    metadata:
-      labels:
-        app: consumer
-    spec:
-      containers:
-        - name: consumer
-          image: marcosxaxa/kafka-consumer:0.0.1
+        - name: challenge-producer
+          image: marcosxaxa/kafka-producer:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "256m"
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: kafka-producer
+#   labels:
+#     app: producer
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: producer
+#   template:
+#     metadata:
+#       labels:
+#         app: producer
+#     spec:
+#       containers:
+#         - name: producer
+#           image: marcosxaxa/kafka-producer:0.0.1
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: kafka-consumer
+#   labels:
+#     app: consumer
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: consumer
+#   template:
+#     metadata:
+#       labels:
+#         app: consumer
+#     spec:
+#       containers:
+#         - name: consumer
+#           image: marcosxaxa/kafka-consumer:0.0.1
