@@ -8,7 +8,7 @@ You need the following installed on your machine to start:
 
 ## Download project code:
 
-To get the code of this project, you need to **git clone** the repository to your machine or to download a **zip** file
+To get the code of this project, you need to **git clone** the repository to your machine or download a **zip** file.
 
 ```
 git clone https://github.com/marcosxaxa/challenge.git
@@ -25,11 +25,11 @@ cd challenge/k8s-vagrant
 vagrant up
 ```
 
-`Depending on the host resources, internet connection speed, etc, this step may take a while. After the playbook finishes, the **Kubernetes** cluster and Kafka are provisioned and configured.`
+` This step may take a while depending on the host resources, internet connection speed, amongst other factors. After the playbook finishes, the **Kubernetes** cluster and Kafka are provisioned and configured.`
 
 ## Accessing cluster CLI
 
-First, you need to _ssh_ into the Kubernetes master server _(same path from the previous step - **cd challenge/k8s-vagrant**)_ and give the command:
+First, you need to _ssh_ into the Kubernetes master server _(the same path from the previous step - **cd challenge/k8s-vagrant**)_ and give the command:
 
 ```
 vagrant ssh k8s-master

@@ -1,13 +1,15 @@
 ---
 - hosts: all
   become: true
+  vars:
+    contents: "{{ lookup('file', './hosts') }}"
   tasks:
     - name: Local DNS for the k8s cluster
       blockinfile:
         path: /etc/hosts
         block: |
-          10.0.0.10 k8s-master
-          10.0.0.11 node-1
+          {{ contents }}
+
     - name: Install packages that allow apt to be used over HTTPS
       apt:
         name: "{{ packages }}"
@@ -89,6 +91,12 @@
           - kubelet
           - kubeadm
           - kubectl
+
+    - name: Create persistence folder
+      file:
+        path: /mnt/data
+        state: directory
+        mode: "0777"
 
     # - name: Pull kubeadm images
     #   command: kubeadm config images pull &

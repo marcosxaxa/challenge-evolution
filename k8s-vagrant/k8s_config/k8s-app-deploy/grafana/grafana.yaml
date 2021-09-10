@@ -1,6 +1,13 @@
 # This is not a recommended configuration, and further support should be available
 # from the Prometheus and Grafana communities.
 ---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -14,7 +21,8 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/mnt/data"
+    path: /mnt/data
+
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -27,7 +35,6 @@ spec:
   resources:
     requests:
       storage: 1Gi
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -75,7 +82,6 @@ spec:
             claimName: grafana-pv-claim
         - name: grafana-logs
           emptyDir:
-
 ---
 apiVersion: v1
 kind: Service
