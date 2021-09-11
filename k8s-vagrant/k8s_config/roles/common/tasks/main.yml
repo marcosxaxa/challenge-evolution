@@ -1,0 +1,5 @@
+---
+# tasks file for common
+
+- name: Install dependecies
+  include_tasks: install_dependencies.yml

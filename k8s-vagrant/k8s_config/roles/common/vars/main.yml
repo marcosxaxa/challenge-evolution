@@ -1,0 +1,4 @@
+---
+# vars file for common
+
+contents: "{{ lookup('file', '../files/hosts') }}"

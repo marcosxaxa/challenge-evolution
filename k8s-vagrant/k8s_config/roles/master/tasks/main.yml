@@ -1,0 +1,5 @@
+---
+# tasks file for master
+
+- name: Config master node
+  import_tasks: config_master.yml

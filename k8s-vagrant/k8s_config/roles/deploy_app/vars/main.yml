@@ -1,0 +1,4 @@
+---
+# vars file for deploy_app
+node_ip: 10.0.0.20
+node_port: 31000
