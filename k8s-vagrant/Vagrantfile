@@ -1,6 +1,6 @@
 IMAGE_NAME = "ubuntu/bionic64"
 MASTER_MEMORY = 2048
-NODE_MEMORY = 3072
+NODE_MEMORY = 3584
 
 
 Vagrant.configure("2") do |config|

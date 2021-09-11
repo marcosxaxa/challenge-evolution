@@ -29,6 +29,13 @@ spec:
         configMapKeyRef:
           name: kafka-metrics
           key: kafka-metrics-config.yml
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: "500m"
+      limits:
+        memory: 512Mi
+        cpu: "500m"
   zookeeper:
     replicas: 3
     storage:

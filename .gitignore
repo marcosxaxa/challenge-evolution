@@ -3,3 +3,4 @@ vms-disks
 kafka/kafka_*
 kafka/python/kafka
 commands*
+k8s-vagrant/*.log
