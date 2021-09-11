@@ -10,7 +10,7 @@ export BasePath=/home/vagrant/k8s-app-deploy
 
 kubectl $KubeConf wait node/k8s-master --for=condition=Ready --timeout=300s
 
-kubectl $KubeConf taint node k8s-master node-role.kubernetes.io/master:NoSchedule-
+# kubectl $KubeConf taint node k8s-master node-role.kubernetes.io/master:NoSchedule-
 
 kubectl $KubeConf apply -f $BasePath/kafka/kafka-operator.yaml -n kafka
 

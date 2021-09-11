@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: challenge-consumer
-          image: marcosxaxa/kafka-consumer:latest
+          image: marcosxaxa/kafka-consumer:0.0.1
           resources:
             limits:
               memory: "128Mi"
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
         - name: challenge-producer
-          image: marcosxaxa/kafka-producer:latest
+          image: marcosxaxa/kafka-producer:0.0.1
           resources:
             limits:
               memory: "128Mi"
