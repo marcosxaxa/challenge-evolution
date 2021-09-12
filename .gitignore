@@ -1,6 +1,6 @@
 Docs
 vms-disks
-kafka
+kafka-app
 commands*
 k8s-vagrant/*.log
 k8s-vagrant/logs*
