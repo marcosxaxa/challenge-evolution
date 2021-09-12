@@ -4,6 +4,6 @@ k8s-master ansible_host=10.0.0.20
 node-1 ansible_host=10.0.0.21
 
 [cluster:vars]
- ansible_ssh_common_args='-o StrictHostKeyChecking=no'
- ansible_ssh_private_key_file=/home/vagrant/.ssh/key
- ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_ssh_private_key_file=/home/vagrant/.ssh/key
+ansible_python_interpreter=/usr/bin/python3
