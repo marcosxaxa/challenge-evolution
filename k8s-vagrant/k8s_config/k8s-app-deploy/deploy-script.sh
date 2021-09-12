@@ -41,6 +41,8 @@ kubectl $KubeConf wait pod/$grafanaName --for=condition=Ready --timeout=300s -n 
 
 kubectl $KubeConf apply -f $BasePath/producer-consumer.yaml -n kafka
 
+kubectl $KubeConf apply -f $BasePath/kube-metrics/metrics.yaml
+
 
 APIKEY=$(curl -X POST -H "Content-Type: application/json" -d '{"name":"apikey", "role": "Admin"}' http://admin:admin@$masterNode:$masterNodePort/api/auth/keys |awk -F '"key":' '{print $2}' | awk -F '"' '{print $2}')
 
