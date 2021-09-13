@@ -18,10 +18,10 @@ Or download it from **https://github.com/marcosxaxa/challenge-evolution.git**
 
 ## Starting the Cluster
 
-After downloading the code described in the last step, **cd** into the folder **challenge/k8s-vagrant** or **downloadedFolderName/k8s-vagrant**
+After downloading the code described in the last step, **cd** into the folder **challenge-evolution/k8s-vagrant** or **downloadedFolderName/k8s-vagrant**
 
 ```
-cd challenge/k8s-vagrant
+cd challenge-evolution/k8s-vagrant
 ```
 
 To start the Kubernetes cluster using Vagrant and VirtualBox, on the vagrant folder _(which have a Vagrantfile in it)_, do the following:
@@ -34,7 +34,7 @@ vagrant up
 
 ## Accessing cluster CLI
 
-First, you need to _ssh_ into the Kubernetes master server _(the same path from the previous step - **cd challenge/k8s-vagrant**)_ and type the command:
+First, you need to _ssh_ into the Kubernetes master server _(the same path from the previous step - **cd challenge-evolution/k8s-vagrant**)_ and type the command:
 
 ```
 vagrant ssh k8s-master
