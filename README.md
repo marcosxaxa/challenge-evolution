@@ -30,7 +30,7 @@ To start the Kubernetes cluster using Vagrant and VirtualBox, on the vagrant fol
 vagrant up
 ```
 
-` :warning: This step may take a while depending on the host resources, internet connection speed, amongst other factors. After the playbook finishes, the **Kubernetes** cluster and Kafka are ready and configured.`
+> :warning: This step may take a while depending on the host resources, internet connection speed, amongst other factors. After the playbook finishes, the **Kubernetes** cluster and Kafka are ready and configured.
 
 ## Accessing cluster CLI
 
