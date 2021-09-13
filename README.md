@@ -12,7 +12,7 @@ To get the code of this project, you need to **git clone** the repository to you
 
 ```
 
-git clone https://github.com/marcosxaxa/challenge-evolution.git.git
+git clone https://github.com/marcosxaxa/challenge-evolution.git
 ```
 
 Or download it from **https://github.com/marcosxaxa/challenge-evolution.git**
