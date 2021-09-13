@@ -11,12 +11,14 @@ You'll need the following installed on your machine:
 To get the code of this project, you need to **git clone** the repository to your machine or download a **zip** file.
 
 ```
-git clone https://github.com/marcosxaxa/challenge-evolution.git
+
+git clone https://github.com/marcosxaxa/challenge-evolution.git.git
 ```
 
 Or download it from **https://github.com/marcosxaxa/challenge-evolution.git**
 
 ## Starting the Cluster
+
 
 After downloading the code described in the last step, **cd** into the folder **challenge-evolution/k8s-vagrant** or **downloadedFolderName/k8s-vagrant**
 
@@ -34,7 +36,9 @@ vagrant up
 
 ## Accessing cluster CLI
 
+
 First, you need to _ssh_ into the Kubernetes master server _(the same path from the previous step - **cd challenge-evolution/k8s-vagrant**)_ and type the command:
+
 
 ```
 vagrant ssh k8s-master

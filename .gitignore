@@ -1,4 +1,10 @@
 Docs
 vms-disks
-kafka/kafka_*
-kafka/python/kafka
+kafka-app
+commands*
+k8s-vagrant/*.log
+k8s-vagrant/logs*
+k8s-vagrant/test.sh
+k8s-vagrant/.vagrant
+k8s-vagrant/k8s_config/bkp
+k8s-vagrant/Vagrantfilebk*

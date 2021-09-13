@@ -1,0 +1,20 @@
+---
+- name: Restart kubelet
+  service:
+    name: kubelet
+    daemon_reload: yes
+    state: restarted
+
+- name: Copy the join command to server location
+  copy:
+    src: ~/join-command
+    dest: /tmp/join-command.sh
+    mode: 0777
+
+- name: Join the node to cluster
+  command: sh /tmp/join-command.sh
+
+- name: Remove join command
+  file:
+    path: join-command
+    state: absent

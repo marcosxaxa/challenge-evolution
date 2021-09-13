@@ -1,0 +1,7 @@
+---
+# tasks file for node
+
+- name: Join and config node
+  import_tasks: join_node.yml
+  tags:
+    - join_node

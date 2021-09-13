@@ -1,0 +1,11 @@
+---
+- name: copy config files to target
+  copy:
+    src: k8s-app-deploy
+    dest: /home/vagrant/
+    mode: 0644
+
+- name: Run script to deploy everything
+  shell: bash /home/vagrant/k8s-app-deploy/deploy-script.sh "{{ node_ip }}" "{{ node_port }}"
+  tags:
+    - run_script

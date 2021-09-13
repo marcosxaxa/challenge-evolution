@@ -1,0 +1,7 @@
+---
+# tasks file for deploy_app
+
+- name: Deploy the app
+  import_tasks: deploy_app.yml
+  tags:
+    - app_deploy

@@ -1,49 +1,58 @@
 IMAGE_NAME = "ubuntu/bionic64"
-N = 1
+MASTER_MEMORY = 2048
+NODE_MEMORY = 3584
+
 
 Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
 
-    config.vm.provider "virtualbox" do |v|
-        v.memory = 2048
-        v.cpus = 2
-    end
-      
     config.vm.define "k8s-master" do |master|
         master.vm.box = IMAGE_NAME
-        master.vm.network "private_network", ip: "10.0.0.10"
+        master.vm.network "private_network", ip: "10.0.0.20"
         master.vm.hostname = "k8s-master"
-        master.vm.provision "ansible" do |ansible|
-            ansible.playbook = "k8s_config/common.yml"
-            ansible.extra_vars = {
-                node_ip: "10.0.0.10",
-            }
-        end
-        master.vm.provision "ansible" do |ansible|
-            ansible.playbook = "k8s_config/master.yml"
-            ansible.extra_vars = {
-                node_ip: "10.0.0.10",
-            }
+        master.vm.provision "shell", path: "k8s_config/scripts/copy_key.sh"
+        master.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--memory", MASTER_MEMORY]
+            v.customize ["modifyvm", :id, "--cpus", "2"]
         end
     end
 
-    (1..N).each do |i|
-        config.vm.define "node-#{i}" do |node|
-            node.vm.box = IMAGE_NAME
-            node.vm.network "private_network", ip: "10.0.0.#{i + 10}"
-            node.vm.hostname = "node-#{i}"
-            node.vm.provision "ansible" do |ansible|
-                ansible.playbook = "k8s_config/common.yml"
-                ansible.extra_vars = {
-                    node_ip: "10.0.0.#{i + 10}",
-                }
-            end
-            node.vm.provision "ansible" do |ansible|
-                ansible.playbook = "k8s_config/node.yml"
-                ansible.extra_vars = {
-                    node_ip: "10.0.0.#{i + 10}",
-                }
-            end
+    config.vm.define "node-1" do |node|
+        node.vm.box = IMAGE_NAME
+        node.vm.network "private_network", ip: "10.0.0.21"
+        node.vm.hostname = "node-1"
+        node.vm.provision "shell", path: "k8s_config/scripts/copy_key.sh"
+        node.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--memory", NODE_MEMORY]
+            v.customize ["modifyvm", :id, "--cpus", "2"]
         end
+    end
+end
+
+
+Vagrant.configure("2") do |conf|
+    conf.ssh.insert_key = false
+
+    # conf.vm.provider "virtualbox" do |c|
+    #     c.memory = 1024
+    #     c.cpus = 1
+    # end
+      
+    conf.vm.define "controller" do |controller|
+        controller.vm.box = IMAGE_NAME
+        controller.vm.network "private_network", ip: "10.0.0.10"
+        controller.vm.hostname = "controller"
+        controller.vm.provision "file", source: "keys/key", destination: "~/.ssh/"
+        controller.vm.provision "shell", path: "k8s_config/scripts/install_ansible.sh"
+
+        controller.vm.provision "file", source: "k8s_config", destination: "/home/vagrant/k8s_config"
+
+        # controller.vm.provision "file", source: "k8s_config/hosts", destination: "~/"
+        
+        controller.vm.provision "shell", inline: "ansible-playbook -i /home/vagrant/k8s_config/hosts /home/vagrant/k8s_config/main_config.yml -u vagrant"
+        controller.vm.provider "virtualbox" do |v|
+            v.customize ["modifyvm", :id, "--memory", "512"]
+            v.customize ["modifyvm", :id, "--cpus", "1"]
+        end       
     end
 end
