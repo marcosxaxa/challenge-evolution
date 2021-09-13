@@ -39,9 +39,13 @@ vagrant up
 
 First, you need to _ssh_ into the Kubernetes master server _(the same path from the previous step - **cd challenge-evolution/k8s-vagrant**)_ and type the command:
 
-
+To access the master node:
 ```
 vagrant ssh k8s-master
+```
+To access the worker node:
+```
+vagrant ssh node-1
 ```
 
 From here, you can perform any call against the **Kubernetes API** with the **kubectl** command, for instance:
