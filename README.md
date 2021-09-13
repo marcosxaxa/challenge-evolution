@@ -61,3 +61,20 @@ The Grafana service is running on port **31000** of the node. To access it, open
 **\*User and password are **admin** and, you can change the password if you want to\***
 
 > :warning: **The information may take some time to load completely on the dashboard**
+
+
+## Cleaning Up
+
+To remove the cluster and the application just go to the **challenge-evolution/k8s-vagrant** folder and type the command:
+
+```
+vagrant destroy
+```
+
+A prompt will show asking confirmation on the deletion of the VMs, just type **y** and enter
+
+To destroy the cluster without the prompt confirmation just use:
+
+```
+vagrant destroy -f
+```
