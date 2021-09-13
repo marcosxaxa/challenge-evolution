@@ -11,7 +11,7 @@ You'll need the following installed on your machine:
 To get the code of this project, you need to **git clone** the repository to your machine or download a **zip** file.
 
 ```
-git clone https://github.com/marcosxaxa/challenge-evolution.git.git
+git clone https://github.com/marcosxaxa/challenge-evolution.git
 ```
 
 Or download it from **https://github.com/marcosxaxa/challenge-evolution.git**
