@@ -11,7 +11,6 @@ You'll need the following installed on your machine:
 To get the code of this project, you need to **git clone** the repository to your machine or download a **zip** file.
 
 ```
-
 git clone https://github.com/marcosxaxa/challenge-evolution.git
 ```
 
@@ -20,7 +19,7 @@ Or download it from **https://github.com/marcosxaxa/challenge-evolution.git**
 ## Starting the Cluster
 
 
-After downloading the code described in the last step, **cd** into the folder **challenge-evolution/k8s-vagrant** or **downloadedFolderName/k8s-vagrant**
+After downloading the code described in the last step open a **terminal** or **cmd/powershell** and, **cd** into the folder **challenge-evolution/k8s-vagrant** or **downloadedFolderName/k8s-vagrant** depending on the download method
 
 ```
 cd challenge-evolution/k8s-vagrant
